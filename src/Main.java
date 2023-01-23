@@ -2,6 +2,12 @@ public class Main {
     public static void main(String[] args) {
         Ticket ticket1 = new Ticket();
         System.out.println(ticket1.PriorityNum);
+        Ticket t1=new Ticket();
+
+        Ticket t2=new Ticket();
+
+        //System.out.println(t1.ticketID);
+        System.out.println(Ticket.ticketID);
 
     }
 
