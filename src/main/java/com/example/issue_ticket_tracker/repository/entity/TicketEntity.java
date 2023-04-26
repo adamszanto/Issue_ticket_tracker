@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
+// spring-boot-starter-data-jpa
+
 @Entity
 @Table(name = "tickets")
 public class TicketEntity {
