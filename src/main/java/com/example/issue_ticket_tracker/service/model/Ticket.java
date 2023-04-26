@@ -1,7 +1,6 @@
 package com.example.issue_ticket_tracker.service.model;
 
 import com.example.issue_ticket_tracker.repository.entity.TicketEntity;
-import jakarta.persistence.Column;
 
 import java.util.Objects;
 

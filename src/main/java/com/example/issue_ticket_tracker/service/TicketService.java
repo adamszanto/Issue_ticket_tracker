@@ -1,11 +1,12 @@
 package com.example.issue_ticket_tracker.service;
 
 import com.example.issue_ticket_tracker.service.model.Ticket;
+import com.example.issue_ticket_tracker.service.model.TicketDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+public
 interface TicketService {
     List<Ticket> getAllTickets();
 
