@@ -2,6 +2,7 @@ package com.example.issue_ticket_tracker.service;
 
 import com.example.issue_ticket_tracker.mapper.TicketMapper;
 import com.example.issue_ticket_tracker.repository.TicketRepository;
+import com.example.issue_ticket_tracker.repository.entity.TicketEntity;
 import com.example.issue_ticket_tracker.service.model.ticket.Ticket;
 import com.example.issue_ticket_tracker.service.model.ticket.TicketDetail;
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ public class TicketServiceImpl implements TicketService {
     public TicketServiceImpl(TicketRepository ticketRepository, TicketMapper ticketMapper) {
         this.ticketRepository = ticketRepository;
         this.ticketMapper = ticketMapper;
+
     }
 
     @Override
@@ -36,7 +38,14 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket createTicket(Ticket ticket) {
-        return null;
+        TicketEntity ticketEntity = new TicketEntity();
+        ticketEntity.setTitle(ticket.getTitle());
+        ticketEntity.setDetail(ticketMapper.convertDetailModeltoEntity(ticket.getDetail()));
+        ticketEntity.setTicketStatusEntity(ticketMapper.convertTicketStatusEntityToModel(ticket.getStatus()));
+
+        TicketEntity savedTicketEntity = ticketRepository.save(ticketEntity);
+
+        return ticketMapper.convertTicketEntitytoModel(savedTicketEntity);
     }
 
     @Override
