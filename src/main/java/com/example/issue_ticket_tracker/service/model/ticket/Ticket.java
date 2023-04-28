@@ -1,6 +1,7 @@
-package com.example.issue_ticket_tracker.service.model;
+package com.example.issue_ticket_tracker.service.model.ticket;
 
-import com.example.issue_ticket_tracker.repository.entity.TicketEntity;
+import com.example.issue_ticket_tracker.repository.entity.TicketDetailEntity;
+import com.example.issue_ticket_tracker.service.model.Priority;
 
 import java.util.List;
 import java.util.Objects;
@@ -8,13 +9,13 @@ import java.util.Objects;
 public class Ticket {
     private Integer ticketId;
     private String title;
-    private TicketDetails detail;
+    private TicketDetail detail;
     private TicketStatus status;
     private List<TicketEvent> ticketEvents;
-    // private enum Priority
-    // Spring Security után...: JWT token-es
-    // private User creater
-    // private User assignee
+    private Priority priority;
+    // TODO: Spring Security után...: JWT token-es:
+    // private User creator
+    // private User owner
 
     public Ticket(Integer ticketId, String title, TicketStatus status) {
         this.ticketId = ticketId;
@@ -48,6 +49,35 @@ public class Ticket {
     public void setStatus(TicketStatus status) {
         this.status = status;
     }
+
+    public TicketDetail getDetail() {
+        return detail;
+    }
+
+
+    public void setDetail(TicketDetail detail) {
+        this.detail = detail;
+    }
+
+    public List<TicketEvent> getTicketEvents() {
+        return ticketEvents;
+    }
+
+    public void setTicketEvents(List<TicketEvent> ticketEvents) {
+        this.ticketEvents = ticketEvents;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
