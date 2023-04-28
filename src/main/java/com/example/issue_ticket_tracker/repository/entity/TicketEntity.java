@@ -13,18 +13,27 @@ import java.util.Objects;
 // spring-boot-starter-data-jpa
 
 @Entity
-@Table(name = "tickets")
+@Table(name = "ticket")
 public class TicketEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer ticketId;
-    @Column(name = "body")
+
+    @Column(name = "title")
     private String title;
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "priority")
     private Priority priority;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ticket_detail_id", referencedColumnName = "ticket_detail_id")
+    @JoinColumn(name = "ticket_detail_id")
     private TicketDetailEntity detail;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @Column(name = "status")
+    private TicketStatusEntity ticketStatusEntity;
+
 
     public TicketEntity(Integer ticketId, String title, Priority priority) {
         this.ticketId = ticketId;
@@ -65,6 +74,14 @@ public class TicketEntity {
 
     public void setDetail(TicketDetailEntity detail) {
         this.detail = detail;
+    }
+
+    public TicketStatusEntity getTicketStatusEntity() {
+        return ticketStatusEntity;
+    }
+
+    public void setTicketStatusEntity(TicketStatusEntity ticketStatusEntity) {
+        this.ticketStatusEntity = ticketStatusEntity;
     }
 
     @Override

@@ -46,7 +46,4 @@ public class TicketController {
         return ticketServiceImpl.getTicketDetails(id);
     }
 
-    // 1. try/catch blokk minden RESTcontrollerbe... ez metódus szinten van...
-    // 2. >> ez implementálni... Controllerenként csinálhatunk Exception elkapó metódusokat. Kontroller szintjén egy globális exception handler...
-    // 3. van globális szintű is, amikor a teljes alkalmazásra nézve tudunk definiálni ilyet.
 }

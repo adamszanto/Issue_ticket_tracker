@@ -9,12 +9,19 @@ import java.time.Instant;
 @Table(name = "ticket_events")
 public class TicketEventEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ticket_event_id")
     private Integer ticketEventId;
+
     @Column(name = "created_at")
     private Instant createdAt;
+
     @Column(name = "type")
     private TicketEventType type;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ticket_id")
+    private TicketEntity ticket;
 
     public Integer getTicketEventId() {
         return ticketEventId;
