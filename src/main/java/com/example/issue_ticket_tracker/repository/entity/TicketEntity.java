@@ -1,6 +1,7 @@
 package com.example.issue_ticket_tracker.repository.entity;
 
 
+import com.example.issue_ticket_tracker.service.model.TicketStatus;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -16,9 +17,9 @@ public class TicketEntity {
     private Integer ticketId;
     @Column(name = "body")
     private String title;
-    private Status status;
+    private TicketStatus status;
 
-    public TicketEntity(Integer ticketId, String title, Status status) {
+    public TicketEntity(Integer ticketId, String title, TicketStatus status) {
         this.ticketId = ticketId;
         this.title = title;
         this.status = status;
@@ -43,11 +44,6 @@ public class TicketEntity {
         this.title = body;
     }
 
-    public enum Status {
-        OPEN,
-        CLOSED,
-        UPDATED
-    }
 
     @Override
     public boolean equals(Object o) {
