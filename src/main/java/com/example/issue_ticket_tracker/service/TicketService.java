@@ -1,8 +1,7 @@
 package com.example.issue_ticket_tracker.service;
 
-import com.example.issue_ticket_tracker.service.model.Ticket;
-import com.example.issue_ticket_tracker.service.model.TicketDetails;
-import org.springframework.stereotype.Service;
+import com.example.issue_ticket_tracker.service.model.ticket.Ticket;
+import com.example.issue_ticket_tracker.service.model.ticket.TicketDetail;
 
 import java.util.List;
 
@@ -14,5 +13,5 @@ interface TicketService {
     Ticket createTicket(Ticket ticket);
     void updateTicket(Integer ticketId);
     void deleteTicket(Integer ticketId);
-    TicketDetails getTicketDetails(Integer ticketId);
+    TicketDetail getTicketDetails(Integer ticketId);
 }

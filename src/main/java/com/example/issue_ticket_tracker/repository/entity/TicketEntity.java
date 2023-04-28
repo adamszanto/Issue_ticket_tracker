@@ -1,9 +1,13 @@
 package com.example.issue_ticket_tracker.repository.entity;
 
 
-import com.example.issue_ticket_tracker.service.model.TicketStatus;
+import com.example.issue_ticket_tracker.service.model.Priority;
+import com.example.issue_ticket_tracker.service.model.ticket.TicketDetail;
+import com.example.issue_ticket_tracker.service.model.ticket.TicketEvent;
+import com.example.issue_ticket_tracker.service.model.ticket.TicketStatus;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 // spring-boot-starter-data-jpa
@@ -13,16 +17,19 @@ import java.util.Objects;
 public class TicketEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Integer ticketId;
     @Column(name = "body")
     private String title;
-    private TicketStatus status;
+    @Column(name = "priority")
+    private Priority priority;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ticket_detail_id", referencedColumnName = "ticket_detail_id")
+    private TicketDetailEntity detail;
 
-    public TicketEntity(Integer ticketId, String title, TicketStatus status) {
+    public TicketEntity(Integer ticketId, String title, Priority priority) {
         this.ticketId = ticketId;
         this.title = title;
-        this.status = status;
+        this.priority = priority;
     }
 
     public TicketEntity() {
@@ -44,6 +51,21 @@ public class TicketEntity {
         this.title = body;
     }
 
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    public TicketDetailEntity getDetail() {
+        return detail;
+    }
+
+    public void setDetail(TicketDetailEntity detail) {
+        this.detail = detail;
+    }
 
     @Override
     public boolean equals(Object o) {
