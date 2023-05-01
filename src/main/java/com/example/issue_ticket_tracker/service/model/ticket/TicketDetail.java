@@ -1,5 +1,8 @@
 package com.example.issue_ticket_tracker.service.model.ticket;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 public class TicketDetail {
     private String ticketBody;
 

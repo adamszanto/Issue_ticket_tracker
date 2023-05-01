@@ -15,15 +15,17 @@ import java.util.List;
 @Service
 public class TicketServiceImpl implements TicketService {
 
-    private final Logger logger = LoggerFactory.getLogger(TicketService.class);
-    private final TicketRepository ticketRepository;
-    private final TicketMapper ticketMapper;
+    private Logger logger = LoggerFactory.getLogger(TicketService.class);
+    private TicketRepository ticketRepository;
+    private TicketMapper ticketMapper;
 
     @Autowired
     public TicketServiceImpl(TicketRepository ticketRepository, TicketMapper ticketMapper) {
         this.ticketRepository = ticketRepository;
         this.ticketMapper = ticketMapper;
+    }
 
+    public TicketServiceImpl() {
     }
 
     @Override
@@ -41,7 +43,7 @@ public class TicketServiceImpl implements TicketService {
         TicketEntity ticketEntity = new TicketEntity();
         ticketEntity.setTitle(ticket.getTitle());
         ticketEntity.setDetail(ticketMapper.convertDetailModeltoEntity(ticket.getDetail()));
-        ticketEntity.setTicketStatusEntity(ticketMapper.convertTicketStatusEntityToModel(ticket.getStatus()));
+        ticketEntity.setTicketStatusEntity(ticketMapper.convertTicketStatusModelToEntity(ticket.getStatus()));
 
         TicketEntity savedTicketEntity = ticketRepository.save(ticketEntity);
 

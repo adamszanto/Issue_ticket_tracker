@@ -6,11 +6,10 @@ import jakarta.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "ticket_events")
+@Table(name = "ticket_event")
 public class TicketEventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ticket_event_id")
     private Integer ticketEventId;
 
     @Column(name = "created_at")
