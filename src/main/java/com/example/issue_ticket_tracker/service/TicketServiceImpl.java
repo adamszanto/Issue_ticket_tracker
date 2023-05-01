@@ -15,15 +15,17 @@ import java.util.List;
 @Service
 public class TicketServiceImpl implements TicketService {
 
-    private final Logger logger = LoggerFactory.getLogger(TicketService.class);
-    private final TicketRepository ticketRepository;
-    private final TicketMapper ticketMapper;
+    private Logger logger = LoggerFactory.getLogger(TicketService.class);
+    private TicketRepository ticketRepository;
+    private TicketMapper ticketMapper;
 
     @Autowired
     public TicketServiceImpl(TicketRepository ticketRepository, TicketMapper ticketMapper) {
         this.ticketRepository = ticketRepository;
         this.ticketMapper = ticketMapper;
+    }
 
+    public TicketServiceImpl() {
     }
 
     @Override

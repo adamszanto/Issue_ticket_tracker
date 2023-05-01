@@ -31,11 +31,11 @@ public class TicketServiceImplTest {
     private TicketMapper ticketMapper;
     private TicketServiceImpl underTest;
 
-    @BeforeEach
-    void init() {
-        ticketMapper = new TicketMapper();
-        underTest = new TicketServiceImpl(ticketRepository, ticketMapper);
-    }
+//    @BeforeEach
+//    void init() {
+//        ticketMapper = new TicketMapper();
+//        underTest = new TicketServiceImpl(ticketRepository, ticketMapper);
+//    }
 
     @Test
     void shouldUnderTestCreateNewTicketWhenTicketProvided() {

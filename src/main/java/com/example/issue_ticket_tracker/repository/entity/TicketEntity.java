@@ -2,9 +2,6 @@ package com.example.issue_ticket_tracker.repository.entity;
 
 
 import com.example.issue_ticket_tracker.service.model.Priority;
-import com.example.issue_ticket_tracker.service.model.ticket.TicketDetail;
-import com.example.issue_ticket_tracker.service.model.ticket.TicketEvent;
-import com.example.issue_ticket_tracker.service.model.ticket.TicketStatus;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,7 +13,7 @@ import java.util.Objects;
 @Table(name = "ticket")
 public class TicketEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ticketId;
 
     @Column(name = "title")
@@ -36,9 +33,6 @@ public class TicketEntity {
 
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
     private List<TicketEventEntity> ticketEvents;
-
-
-
 
 
     public TicketEntity(Integer ticketId, String title, Priority priority) {

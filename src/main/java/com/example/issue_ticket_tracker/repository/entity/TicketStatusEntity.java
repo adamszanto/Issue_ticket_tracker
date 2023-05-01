@@ -1,6 +1,5 @@
 package com.example.issue_ticket_tracker.repository.entity;
 
-import com.example.issue_ticket_tracker.service.model.ticket.TicketStatus;
 import jakarta.persistence.*;
 
 @Entity
