@@ -3,7 +3,6 @@ package com.example.issue_ticket_tracker.mapper;
 import com.example.issue_ticket_tracker.controller.dto.TicketDto;
 import com.example.issue_ticket_tracker.repository.entity.TicketDetailEntity;
 import com.example.issue_ticket_tracker.repository.entity.TicketEntity;
-import com.example.issue_ticket_tracker.repository.entity.TicketEventEntity;
 import com.example.issue_ticket_tracker.repository.entity.TicketStatusEntity;
 import com.example.issue_ticket_tracker.service.model.ticket.Ticket;
 import com.example.issue_ticket_tracker.service.model.ticket.TicketDetail;
@@ -55,12 +54,13 @@ public class TicketMapper {
         return ticketDto;
     }
 
-    public TicketStatusEntity convertTicketStatusEntityToModel(TicketStatus ticketStatus) {
+    public TicketStatusEntity convertTicketStatusModelToEntity(TicketStatus ticketStatus) {
         TicketStatusEntity ticketStatusEntity = new TicketStatusEntity();
         ticketStatusEntity.setTicketStatusId(ticketStatus.getTicketStatusId());
         ticketStatusEntity.setStatus(ticketStatus.getStatus());
 
         return ticketStatusEntity;
     }
+
 
 }

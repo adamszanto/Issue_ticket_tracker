@@ -27,12 +27,18 @@ public class TicketEntity {
     private Priority priority;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ticket_detail_id")
+    @JoinColumn(name = "detail_id")
     private TicketDetailEntity detail;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @Column(name = "status")
-    private TicketStatusEntity ticketStatusEntity;
+    @JoinColumn(name = "status")
+    private TicketStatusEntity status;
+
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
+    private List<TicketEventEntity> ticketEvents;
+
+
+
 
 
     public TicketEntity(Integer ticketId, String title, Priority priority) {
@@ -77,11 +83,11 @@ public class TicketEntity {
     }
 
     public TicketStatusEntity getTicketStatusEntity() {
-        return ticketStatusEntity;
+        return status;
     }
 
-    public void setTicketStatusEntity(TicketStatusEntity ticketStatusEntity) {
-        this.ticketStatusEntity = ticketStatusEntity;
+    public void setTicketStatusEntity(TicketStatusEntity status) {
+        this.status = status;
     }
 
     @Override

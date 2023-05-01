@@ -2,7 +2,9 @@ package com.example.issue_ticket_tracker.service;
 
 import com.example.issue_ticket_tracker.mapper.TicketMapper;
 import com.example.issue_ticket_tracker.repository.TicketRepository;
+import com.example.issue_ticket_tracker.repository.entity.TicketDetailEntity;
 import com.example.issue_ticket_tracker.repository.entity.TicketEntity;
+import com.example.issue_ticket_tracker.repository.entity.TicketStatusEntity;
 import com.example.issue_ticket_tracker.service.model.ticket.Ticket;
 import com.example.issue_ticket_tracker.service.model.ticket.TicketDetail;
 import com.example.issue_ticket_tracker.service.model.ticket.TicketStatus;
@@ -21,6 +23,11 @@ public class TicketServiceImplTest {
 
     @Mock
     private TicketRepository ticketRepository;
+    @Mock
+    private TicketDetail ticketDetail;
+    @Mock
+    private TicketStatus ticketStatus;
+    @Mock
     private TicketMapper ticketMapper;
     private TicketServiceImpl underTest;
 
@@ -43,7 +50,8 @@ public class TicketServiceImplTest {
 
         ticket.setTicketId(101);
         ticket.setTitle("Minden");
-        ticket.setDetail(ticketDetail);
+        ticket.setDetail(new TicketDetail());
+        ticket.setStatus(new TicketStatus());
 
         Ticket expectedResult = new Ticket();
         expectedResult.setTicketId(ticket.getTicketId());
@@ -57,6 +65,9 @@ public class TicketServiceImplTest {
 
 
         when(ticketRepository.save(ticketEntity)).thenReturn(ticketEntity);
+        when(ticketMapper.convertDetailModeltoEntity(ticketDetail)).thenReturn(new TicketDetailEntity());
+        when(ticketMapper.convertTicketStatusModelToEntity(ticketStatus)).thenReturn(new TicketStatusEntity());
+        when(ticketMapper.convertTicketEntitytoModel(ticketEntity)).thenReturn(expectedResult);
 
         // When
         Ticket result = underTest.createTicket(ticket);

@@ -41,7 +41,7 @@ public class TicketServiceImpl implements TicketService {
         TicketEntity ticketEntity = new TicketEntity();
         ticketEntity.setTitle(ticket.getTitle());
         ticketEntity.setDetail(ticketMapper.convertDetailModeltoEntity(ticket.getDetail()));
-        ticketEntity.setTicketStatusEntity(ticketMapper.convertTicketStatusEntityToModel(ticket.getStatus()));
+        ticketEntity.setTicketStatusEntity(ticketMapper.convertTicketStatusModelToEntity(ticket.getStatus()));
 
         TicketEntity savedTicketEntity = ticketRepository.save(ticketEntity);
 

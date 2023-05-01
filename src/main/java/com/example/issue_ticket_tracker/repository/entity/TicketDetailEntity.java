@@ -3,9 +3,11 @@ package com.example.issue_ticket_tracker.repository.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "ticket_detail")
 public class TicketDetailEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     @Column(name="ticket_detail_id")
     private Integer ticketDetailEntityId;
 
