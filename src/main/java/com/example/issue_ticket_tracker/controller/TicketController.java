@@ -28,13 +28,13 @@ public class TicketController {
         this.ticketMapper = ticketMapper;
     }
 
-    @GetMapping()
+    @GetMapping
     public List<Ticket> getAllTickets() {
         logger.info("- Custom log: Got all tickets");
         return ticketServiceImpl.getAllTickets();
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<TicketDto> createTicket(@Valid @RequestBody TicketDto ticketDto) {
         Ticket ticket = ticketServiceImpl.createTicket(ticketDto.getTicket());
         TicketDto convertedTicket = ticketMapper.convertTicketModelToDto(ticket);

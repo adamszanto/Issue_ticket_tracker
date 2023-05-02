@@ -9,7 +9,7 @@ import java.time.Instant;
 @Table(name = "ticket_event")
 public class TicketEventEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer ticketEventId;
 
     @Column(name = "created_at")
@@ -18,7 +18,8 @@ public class TicketEventEntity {
     @Column(name = "type")
     private TicketEventType type;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    // TODO: Nem teszem bele equals, hashCode, toString-be...
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {})
     @JoinColumn(name = "ticket_id")
     private TicketEntity ticket;
 
