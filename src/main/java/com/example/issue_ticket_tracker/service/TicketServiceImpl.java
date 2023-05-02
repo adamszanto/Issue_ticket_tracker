@@ -40,13 +40,8 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket createTicket(Ticket ticket) {
-        TicketEntity ticketEntity = new TicketEntity();
-        ticketEntity.setTitle(ticket.getTitle());
-        ticketEntity.setDetail(ticketMapper.convertDetailModeltoEntity(ticket.getDetail()));
-        ticketEntity.setTicketStatusEntity(ticketMapper.convertTicketStatusModelToEntity(ticket.getStatus()));
-
+        TicketEntity ticketEntity = ticketMapper.convertTicketModelToEntity(ticket);
         TicketEntity savedTicketEntity = ticketRepository.save(ticketEntity);
-
         return ticketMapper.convertTicketEntitytoModel(savedTicketEntity);
     }
 

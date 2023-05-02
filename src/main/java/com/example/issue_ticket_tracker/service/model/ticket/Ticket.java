@@ -1,6 +1,5 @@
 package com.example.issue_ticket_tracker.service.model.ticket;
 
-import com.example.issue_ticket_tracker.repository.entity.TicketDetailEntity;
 import com.example.issue_ticket_tracker.service.model.Priority;
 
 import java.util.List;
@@ -17,11 +16,6 @@ public class Ticket {
     // private User creator
     // private User owner
 
-    public Ticket(Integer ticketId, String title, TicketStatus status) {
-        this.ticketId = ticketId;
-        this.title = title;
-        this.status = status;
-    }
 
     public Ticket() {
     }

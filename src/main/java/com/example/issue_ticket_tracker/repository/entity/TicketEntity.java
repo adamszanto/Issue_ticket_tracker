@@ -4,8 +4,7 @@ package com.example.issue_ticket_tracker.repository.entity;
 import com.example.issue_ticket_tracker.service.model.Priority;
 import jakarta.persistence.*;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 // spring-boot-starter-data-jpa
 
@@ -13,7 +12,7 @@ import java.util.Objects;
 @Table(name = "ticket")
 public class TicketEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer ticketId;
 
     @Column(name = "title")
@@ -23,17 +22,21 @@ public class TicketEntity {
     @Column(name = "priority")
     private Priority priority;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "detail_id")
+    // TODO: Nem teszem bele equals, hashCode, toString-be...
+    @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL)
     private TicketDetailEntity detail;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "status")
-    private TicketStatusEntity status;
+    // TODO: Nem teszem bele equals, hashCode, toString-be...
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "ticket_to_status",
+            joinColumns = @JoinColumn(name = "ticket_id"),
+            inverseJoinColumns = @JoinColumn(name = "status_id"))
+    private Set<TicketStatusEntity> status;
 
-    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
+    // TODO: Nem teszem bele equals, hashCode, toString-be...
+    @OneToMany(mappedBy = "ticket", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private List<TicketEventEntity> ticketEvents;
-
 
     public TicketEntity(Integer ticketId, String title, Priority priority) {
         this.ticketId = ticketId;
@@ -76,12 +79,30 @@ public class TicketEntity {
         this.detail = detail;
     }
 
-    public TicketStatusEntity getTicketStatusEntity() {
+    public Set<TicketStatusEntity> getStatus() {
         return status;
     }
 
-    public void setTicketStatusEntity(TicketStatusEntity status) {
-        this.status = status;
+    public void setStatus(Set<TicketStatusEntity> status) {
+        if(this.status != null) {
+            this.status.clear();
+        }
+        status.forEach(s-> add(s));
+    }
+
+    public void add(TicketStatusEntity ticketStatusEntity) {
+        if(this.status == null) {
+            this.status = new LinkedHashSet<>();
+        }
+        this.status.add(ticketStatusEntity);
+    }
+
+    public List<TicketEventEntity> getTicketEvents() {
+        return ticketEvents;
+    }
+
+    public void setTicketEvents(List<TicketEventEntity> ticketEvents) {
+        this.ticketEvents = ticketEvents;
     }
 
     @Override
