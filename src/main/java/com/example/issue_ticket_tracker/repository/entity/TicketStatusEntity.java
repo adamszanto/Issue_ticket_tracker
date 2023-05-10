@@ -13,8 +13,7 @@ public class TicketStatusEntity {
     private Integer statusId;
     @Column(name = "status")
     private String status;
-
-    // TODO: Nem teszem bele equals, hashCode, toString-be...
+    // TODO: Statusban lévő Ticket-et nem teszem bele equals, hashCode, toString-be...
     @ManyToMany
     private Set<TicketEntity> ticket;
 
@@ -40,7 +39,6 @@ public class TicketStatusEntity {
     public Set<TicketEntity> getTicket() {
         return ticket;
     }
-
     public void setTicket(Set<TicketEntity> tickets) {
         if(this.ticket != null) {
             ticket.clear();
@@ -48,7 +46,6 @@ public class TicketStatusEntity {
 
         tickets.forEach(s -> add(s));
     }
-
     public void setStatus(String status) {
         this.status = status;
     }

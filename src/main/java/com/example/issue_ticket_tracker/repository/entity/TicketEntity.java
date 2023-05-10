@@ -1,12 +1,8 @@
 package com.example.issue_ticket_tracker.repository.entity;
-
-
 import com.example.issue_ticket_tracker.service.model.Priority;
 import jakarta.persistence.*;
 
 import java.util.*;
-
-// spring-boot-starter-data-jpa
 
 @Entity
 @Table(name = "ticket")
@@ -24,7 +20,7 @@ public class TicketEntity {
 
     // TODO: Nem teszem bele equals, hashCode, toString-be...
     @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL)
-    private TicketDetailEntity detail;
+    private TicketDetailsEntity detail;
 
     // TODO: Nem teszem bele equals, hashCode, toString-be...
     @ManyToMany(cascade = CascadeType.ALL)
@@ -71,11 +67,11 @@ public class TicketEntity {
         this.priority = priority;
     }
 
-    public TicketDetailEntity getDetail() {
+    public TicketDetailsEntity getDetail() {
         return detail;
     }
 
-    public void setDetail(TicketDetailEntity detail) {
+    public void setDetail(TicketDetailsEntity detail) {
         this.detail = detail;
     }
 

@@ -4,7 +4,7 @@ import com.example.issue_ticket_tracker.mapper.TicketMapper;
 import com.example.issue_ticket_tracker.repository.TicketRepository;
 import com.example.issue_ticket_tracker.repository.entity.TicketEntity;
 import com.example.issue_ticket_tracker.service.model.ticket.Ticket;
-import com.example.issue_ticket_tracker.service.model.ticket.TicketDetail;
+import com.example.issue_ticket_tracker.service.model.ticket.TicketDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +56,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public TicketDetail getTicketDetails(Integer ticketId) {
+    public TicketDetails getTicketDetails(Integer ticketId) {
         return null;
     }
 }

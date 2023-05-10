@@ -4,7 +4,7 @@ import com.example.issue_ticket_tracker.controller.dto.TicketDto;
 import com.example.issue_ticket_tracker.mapper.TicketMapper;
 import com.example.issue_ticket_tracker.service.TicketServiceImpl;
 import com.example.issue_ticket_tracker.service.model.ticket.Ticket;
-import com.example.issue_ticket_tracker.service.model.ticket.TicketDetail;
+import com.example.issue_ticket_tracker.service.model.ticket.TicketDetails;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +42,7 @@ public class TicketController {
     }
 
     @GetMapping("/{id}")
-    public TicketDetail getTicketDetails(@PathVariable Integer id) {
+    public TicketDetails getTicketDetails(@PathVariable Integer id) {
         return ticketServiceImpl.getTicketDetails(id);
     }
 
