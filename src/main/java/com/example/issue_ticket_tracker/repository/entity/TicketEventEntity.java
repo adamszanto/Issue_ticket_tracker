@@ -43,6 +43,14 @@ public class TicketEventEntity {
         return type;
     }
 
+    public TicketEntity getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(TicketEntity ticket) {
+        this.ticket = ticket;
+    }
+
     public void setType(TicketEventType type) {
         this.type = type;
     }

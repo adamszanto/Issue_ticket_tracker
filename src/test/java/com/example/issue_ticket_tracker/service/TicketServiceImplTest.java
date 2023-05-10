@@ -3,9 +3,8 @@ package com.example.issue_ticket_tracker.service;
 import com.example.issue_ticket_tracker.mapper.TicketMapper;
 import com.example.issue_ticket_tracker.repository.TicketRepository;
 import com.example.issue_ticket_tracker.repository.entity.TicketEntity;
-import com.example.issue_ticket_tracker.repository.entity.TicketStatusEntity;
 import com.example.issue_ticket_tracker.service.model.ticket.Ticket;
-import com.example.issue_ticket_tracker.service.model.ticket.TicketDetail;
+import com.example.issue_ticket_tracker.service.model.ticket.TicketDetails;
 import com.example.issue_ticket_tracker.service.model.ticket.TicketStatus;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,7 @@ public class TicketServiceImplTest {
     @Mock
     private TicketRepository ticketRepository;
     @Mock
-    private TicketDetail ticketDetail;
+    private TicketDetails ticketDetails;
     @Mock
     private TicketStatus ticketStatus;
     @Mock
@@ -41,16 +40,16 @@ public class TicketServiceImplTest {
     void shouldUnderTestCreateNewTicketWhenTicketProvided() {
         // Given
         Ticket ticket = new Ticket();
-        TicketDetail ticketDetail = new TicketDetail();
+        TicketDetails ticketDetails = new TicketDetails();
         TicketStatus ticketStatus = new TicketStatus();
 
-        ticketDetail.setTicketBody("Minden rendben van");
+        ticketDetails.setTicketBody("Minden rendben van");
         ticketStatus.setTicketStatusId(10);
         ticketStatus.setStatus("Nem változott a státusz");
 
         ticket.setTicketId(101);
         ticket.setTitle("Minden");
-        ticket.setDetail(new TicketDetail());
+        ticket.setDetail(new TicketDetails());
         ticket.setStatus(new TicketStatus());
 
         Ticket expectedResult = new Ticket();
@@ -66,7 +65,7 @@ public class TicketServiceImplTest {
 
         when(ticketRepository.save(ticketEntity)).thenReturn(ticketEntity);
    //     when(ticketMapper.convertDetailModeltoEntity(ticketDetail)).thenReturn(new TicketDetailEntity());
-        when(ticketMapper.convertTicketStatusModelToEntity(ticketStatus)).thenReturn(new TicketStatusEntity());
+   //     when(ticketStatusMapper.convertTicketStatusModelToEntity(ticketStatus)).thenReturn(new TicketStatusEntity());
         when(ticketMapper.convertTicketEntitytoModel(ticketEntity)).thenReturn(expectedResult);
 
         // When

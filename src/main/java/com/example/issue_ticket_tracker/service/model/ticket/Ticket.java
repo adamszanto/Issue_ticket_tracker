@@ -4,18 +4,18 @@ import com.example.issue_ticket_tracker.service.model.Priority;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Ticket {
     private Integer ticketId;
     private String title;
-    private TicketDetail detail;
-    private TicketStatus status;
+    private TicketDetails detail;
+    private Set<TicketStatus> status;
     private List<TicketEvent> ticketEvents;
     private Priority priority;
     // TODO: Spring Security után...: JWT token-es:
     // private User creator
     // private User owner
-
 
     public Ticket() {
     }
@@ -36,20 +36,20 @@ public class Ticket {
         this.title = title;
     }
 
-    public TicketStatus getStatus() {
+    public Set<TicketStatus> getStatus() {
         return status;
     }
 
-    public void setStatus(TicketStatus status) {
+    public void setStatus(Set<TicketStatus> status) {
         this.status = status;
     }
 
-    public TicketDetail getDetail() {
+    public TicketDetails getDetail() {
         return detail;
     }
 
 
-    public void setDetail(TicketDetail detail) {
+    public void setDetail(TicketDetails detail) {
         this.detail = detail;
     }
 

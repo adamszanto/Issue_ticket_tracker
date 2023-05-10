@@ -1,23 +1,27 @@
 package com.example.issue_ticket_tracker.mapper;
 
-import com.example.issue_ticket_tracker.repository.entity.TicketDetailEntity;
-import com.example.issue_ticket_tracker.service.model.ticket.TicketDetail;
+import com.example.issue_ticket_tracker.repository.entity.TicketDetailsEntity;
+import com.example.issue_ticket_tracker.repository.entity.TicketEntity;
+import com.example.issue_ticket_tracker.service.model.ticket.TicketDetails;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TicketDetailsMapper {
 
-    public TicketDetailEntity convertDetailModeltoEntity(TicketDetail detail) {
-        TicketDetailEntity ticketDetailEntity = new TicketDetailEntity();
-        ticketDetailEntity.setTicketBody(detail.getTicketBody());
+    public TicketDetailsEntity convertDetailModeltoEntity(TicketDetails detail, TicketEntity ticketEntity) {
+        TicketDetailsEntity ticketDetailsEntity = new TicketDetailsEntity();
+        ticketDetailsEntity.setTicketDetailEntityId(detail.getId());
+        ticketDetailsEntity.setTicketBody(detail.getTicketBody());
+        ticketDetailsEntity.setTicket(ticketEntity);
 
-        return ticketDetailEntity;
+        return ticketDetailsEntity;
     }
 
-    public TicketDetail convertDetailEntitytoModel(TicketDetailEntity ticketDetailEntity) {
-        TicketDetail ticketDetail = new TicketDetail();
-        ticketDetail.setTicketBody(ticketDetailEntity.getTicketBody());
+    public TicketDetails convertDetailEntitytoModel(TicketDetailsEntity ticketDetailsEntity) {
+        TicketDetails ticketDetails = new TicketDetails();
+        ticketDetails.setId(ticketDetailsEntity.getTicketDetailEntityId());
+        ticketDetails.setTicketBody(ticketDetailsEntity.getTicketBody());
 
-        return ticketDetail;
+        return ticketDetails;
     }
 }
