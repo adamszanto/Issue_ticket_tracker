@@ -19,7 +19,7 @@ public class TicketEntity {
     private Priority priority;
 
     // TODO: Nem teszem bele equals, hashCode, toString-be...
-    @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "ticket", cascade = CascadeType.ALL)
     private TicketDetailsEntity detail;
 
     // TODO: Nem teszem bele equals, hashCode, toString-be...

@@ -6,14 +6,14 @@ import jakarta.persistence.*;
 @Table(name = "ticket_detail")
 public class TicketDetailsEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer ticketDetailEntityId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer ticketDetailId;
 
     @Column(name = "ticket_body")
     private String ticketBody;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ticket_id", referencedColumnName = "ticketId")
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ticket_id", nullable = false)
     private TicketEntity ticket;
 
     public String getTicketBody() {
@@ -24,12 +24,12 @@ public class TicketDetailsEntity {
         this.ticketBody = ticketBody;
     }
 
-    public Integer getTicketDetailEntityId() {
-        return ticketDetailEntityId;
+    public Integer getTicketDetailId() {
+        return ticketDetailId;
     }
 
-    public void setTicketDetailEntityId(Integer ticketDetailEntityId) {
-        this.ticketDetailEntityId = ticketDetailEntityId;
+    public void setTicketDetailId(Integer ticketDetailEntityId) {
+        this.ticketDetailId = ticketDetailEntityId;
     }
 
     public TicketEntity getTicket() {
