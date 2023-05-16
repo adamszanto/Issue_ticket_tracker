@@ -1,4 +1,4 @@
-# Issue_ticket_tracker
+# Issue Ticket Tracker
 
 Ticket Management System
 This is a Spring Boot REST application designed to manage tickets. It allows users to add, update, and delete tickets, as well as modify their details such as title, detail, status, events, and priorities.
@@ -20,8 +20,8 @@ MySQL: The data is stored in a MySQL database.
 API Endpoints
 The following API endpoints are available:
 
-GET /tickets: Retrieve all tickets.
-POST /tickets: Create a new ticket.
-GET /tickets/{id}: Retrieve a specific ticket by ID.
-PUT /tickets/{id}: Update the details of a specific ticket.
-DELETE /tickets/{id}: Delete a specific ticket.
+*GET /tickets: Retrieve all tickets.
+*POST /tickets: Create a new ticket.
+*GET /tickets/{id}: Retrieve a specific ticket by ID.
+*PUT /tickets/{id}: Update the details of a specific ticket.
+*DELETE /tickets/{id}: Delete a specific ticket.
