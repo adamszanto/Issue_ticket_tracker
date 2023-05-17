@@ -3,6 +3,7 @@ package com.example.issue_ticket_tracker.service;
 import com.example.issue_ticket_tracker.mapper.TicketMapper;
 import com.example.issue_ticket_tracker.repository.TicketRepository;
 import com.example.issue_ticket_tracker.repository.entity.TicketEntity;
+import com.example.issue_ticket_tracker.service.exception.TicketNotFoundException;
 import com.example.issue_ticket_tracker.service.model.ticket.Ticket;
 import com.example.issue_ticket_tracker.service.model.ticket.TicketDetails;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TicketServiceImpl implements TicketService {
@@ -30,12 +32,17 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<Ticket> getAllTickets() {
-        return null;
+        return ticketRepository.findAll().stream()
+                .map(ticketEntity -> ticketMapper.convertTicketEntitytoModel(ticketEntity))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Ticket getTicketById(Integer ticketId) {
-        return null;
+        TicketEntity ticketEntity = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new TicketNotFoundException("Ticket with given id is not found."));
+        return ticketMapper.convertTicketEntitytoModel(ticketEntity);
+
     }
 
     @Override
@@ -47,7 +54,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public void updateTicket(Integer ticketId) {
-
+        ticketRepository.
     }
 
     @Override
