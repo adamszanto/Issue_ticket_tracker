@@ -10,7 +10,7 @@ public class TicketDetailsMapper {
 
     public TicketDetailsEntity convertDetailModeltoEntity(TicketDetails detail, TicketEntity ticketEntity) {
         TicketDetailsEntity ticketDetailsEntity = new TicketDetailsEntity();
-        ticketDetailsEntity.setTicketDetailEntityId(detail.getId());
+        ticketDetailsEntity.setTicketDetailId(detail.getId());
         ticketDetailsEntity.setTicketBody(detail.getTicketBody());
         ticketDetailsEntity.setTicket(ticketEntity);
 
@@ -19,7 +19,7 @@ public class TicketDetailsMapper {
 
     public TicketDetails convertDetailEntitytoModel(TicketDetailsEntity ticketDetailsEntity) {
         TicketDetails ticketDetails = new TicketDetails();
-        ticketDetails.setId(ticketDetailsEntity.getTicketDetailEntityId());
+        ticketDetails.setId(ticketDetailsEntity.getTicketDetailId());
         ticketDetails.setTicketBody(ticketDetailsEntity.getTicketBody());
 
         return ticketDetails;
