@@ -25,7 +25,7 @@ public class TicketServiceTest {
     @Mock
     private TicketRepository ticketRepository;
     private TicketMapper ticketMapper;
-    private TicketServiceImpl underTest;
+    private TicketService underTest;
     private TicketDetailsMapper ticketDetailsMapper;
     private TicketStatusMapper ticketStatusMapper;
     private TicketEventMapper ticketEventMapper;
@@ -37,7 +37,7 @@ public class TicketServiceTest {
         ticketEventMapper = new TicketEventMapper();
 
         ticketMapper = new TicketMapper(ticketDetailsMapper, ticketStatusMapper, ticketEventMapper);
-        underTest = new TicketServiceImpl(ticketRepository, ticketMapper);
+        underTest = new TicketService(ticketRepository, ticketMapper);
     }
 
     @Test
@@ -56,6 +56,7 @@ public class TicketServiceTest {
         ticketEntity.setTitle(ticket.getTitle());
 
         when(ticketRepository.save(ticketEntity)).thenReturn(ticketEntity);
+
         // When
         Ticket result = underTest.createTicket(ticket);
 
@@ -70,7 +71,6 @@ public class TicketServiceTest {
         ticket.setTicketId(101);
         ticket.setTitle("Test");
 
-
         Ticket expectedResult = new Ticket();
         expectedResult.setTicketId(ticket.getTicketId());
         expectedResult.setTitle(ticket.getTitle());
@@ -83,13 +83,10 @@ public class TicketServiceTest {
 
         when(ticketRepository.findById(101)).thenReturn(optionalTicketEntity);
 
-
-
         // When
         Ticket result = underTest.getTicketById(101);
 
         // Then
-
         assertEquals(result, expectedResult);
         verify(ticketRepository).findById(101);
     }

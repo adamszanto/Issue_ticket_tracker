@@ -2,9 +2,14 @@ package com.example.issue_ticket_tracker.mapper;
 
 import com.example.issue_ticket_tracker.controller.dto.TicketDto;
 import com.example.issue_ticket_tracker.repository.entity.TicketEntity;
+import com.example.issue_ticket_tracker.repository.entity.TicketEventEntity;
+import com.example.issue_ticket_tracker.repository.entity.TicketStatusEntity;
 import com.example.issue_ticket_tracker.service.model.ticket.Ticket;
+import com.example.issue_ticket_tracker.service.model.ticket.TicketEventType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 @Component
 public class TicketMapper {
@@ -71,5 +76,32 @@ public class TicketMapper {
         ticketDto.setTicket(ticket);
 
         return ticketDto;
+    }
+
+    public void patchTicketEntityByTicket(TicketEntity ticketEntity, Ticket ticket) {
+        if(ticket.getTitle() != null) {
+            ticketEntity.setTitle(ticket.getTitle());
+        }
+
+        if(ticket.getPriority() != null) {
+            ticketEntity.setPriority(ticket.getPriority());
+        }
+
+        if(ticket.getDetail() != null) {
+            ticketEntity.getDetail().setTicketBody(ticket.getDetail().getTicketBody());
+        }
+
+        if(ticket.getStatus() != null) {
+            TicketStatusEntity ticketStatusEntity = new TicketStatusEntity();
+            ticketStatusEntity.setStatus(ticket.getStatus().iterator().next().getStatus());
+            ticketStatusEntity.setTicket(Set.of(ticketEntity));
+            ticketEntity.add(ticketStatusEntity);
+        }
+
+        TicketEventEntity updatedEvent = new TicketEventEntity();
+        updatedEvent.setType(TicketEventType.UPDATED);
+        updatedEvent.setTicket(ticketEntity);
+
+        ticketEntity.add(updatedEvent);
     }
 }
