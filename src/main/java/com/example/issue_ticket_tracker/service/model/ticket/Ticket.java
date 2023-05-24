@@ -28,6 +28,8 @@ public class Ticket {
         this.ticketId = ticketId;
     }
 
+    // CreatedAt legyen...
+
     public String getTitle() {
         return title;
     }

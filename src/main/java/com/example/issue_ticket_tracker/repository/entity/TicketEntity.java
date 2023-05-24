@@ -7,6 +7,8 @@ import java.util.*;
 @Entity
 @Table(name = "ticket")
 public class TicketEntity {
+
+    // TODO: boolean active, default = true
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer ticketId;
@@ -41,6 +43,7 @@ public class TicketEntity {
     }
 
     public TicketEntity() {
+
     }
 
     public Integer getTicketId() {
@@ -91,6 +94,13 @@ public class TicketEntity {
             this.status = new LinkedHashSet<>();
         }
         this.status.add(ticketStatusEntity);
+    }
+
+    public void add(TicketEventEntity ticketEventEntity) {
+        if(this.ticketEvents == null) {
+            this.ticketEvents = new LinkedList<>();
+        }
+        this.ticketEvents.add(ticketEventEntity);
     }
 
     public List<TicketEventEntity> getTicketEvents() {

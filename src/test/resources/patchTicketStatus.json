@@ -1,0 +1,8 @@
+{
+    "ticket" : {
+        "ticketId" : 1,
+        "status" : [{
+           "status" : "New status"
+        }]
+    }
+}
