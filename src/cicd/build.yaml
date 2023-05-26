@@ -1,0 +1,27 @@
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  - group: git-configurations
+
+steps:
+  - task: JavaToolInstaller@0
+    inputs:
+      versionSpec: '17'
+      jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
+    displayName: 'Install Java17'
+  - task: InstallSSHKey@0
+    inputs:
+      knownHostsEntry: $(knownHosts)
+      sshPublicKey: $(publicKey)
+      sshKeySecureFile: 'id_rsa'
+    displayName: 'Install SSH'
+  - script: |
+      ./mvnw clean test
+    displayName: 'Validate project & run tests'
+
+  - script: |
+      ./mvnw package 
+      ls -l ./target
+    displayName: 'Create JAR'
