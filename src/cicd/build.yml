@@ -3,6 +3,7 @@ pool:
 
 variables:
   - group: git-configurations
+  - group: docker-configurations
 
 steps:
   - task: JavaToolInstaller@0
@@ -33,3 +34,8 @@ steps:
       docker images | grep issue
     displayName: 'Create docker image'
 
+  - script: |
+      docker tag issue_ticket_tracker:0.0.1 adamsz1/issue_ticket_tracker:0.0.1
+      docker login docker.io -u $(dockerhubUsername) -p $(dockerhubPassword)
+      docker push adamsz1/issue_ticket_tracker:0.0.1
+    displayName: 'Push docker image'
