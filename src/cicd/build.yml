@@ -25,3 +25,12 @@ steps:
       mvn package 
       ls -l ./target
     displayName: 'Create JAR'
+
+  - script: |
+      docker --version
+      docker ps
+      docker build --tag issue_ticket_tracker:0.0.1
+      docker images 
+
+    displayName: 'Create docker image'
+
