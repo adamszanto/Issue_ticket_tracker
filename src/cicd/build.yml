@@ -18,10 +18,10 @@ steps:
       sshKeySecureFile: 'id_rsa'
     displayName: 'Install SSH'
   - script: |
-      ./mvnw clean test
+      mvn clean test
     displayName: 'Validate project & run tests'
 
   - script: |
-      ./mvnw package 
+      mvn package 
       ls -l ./target
     displayName: 'Create JAR'
