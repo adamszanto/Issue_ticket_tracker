@@ -29,8 +29,7 @@ steps:
   - script: |
       docker --version
       docker ps
-      docker build --tag issue_ticket_tracker:0.0.1
-      docker images 
-
+      docker build --tag issue_ticket_tracker:0.0.1 .
+      docker images | grep issue
     displayName: 'Create docker image'
 
