@@ -17,11 +17,19 @@ steps:
       sshPublicKey: $(publicKey)
       sshKeySecureFile: 'id_rsa'
     displayName: 'Install SSH'
+  - task: DockerInstaller@0
+    inputs:
+      dockerVersion: '20.10.21'
+    displayName: 'Install Docker'
   - script: |
       ./mvnw clean test
-    displayName: 'Validate project & run tests'
+    displayName: 'Compile & test'
 
   - script: |
-      ./mvnw package 
-      ls -l ./target
+      ./mvnw package
     displayName: 'Create JAR'
+
+  - script: |
+      docker build --tag issuetracker:latest .
+      docker images
+    displayName: 'Create Docker Image'
