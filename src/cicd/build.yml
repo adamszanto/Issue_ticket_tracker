@@ -63,6 +63,7 @@ steps:
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     displayName: 'Update maven version'
 
+#      Ha skip ci bennevan a commit messageben, akkor az nem triggereli a pipeline-t. Tehát nem lesz infinite loop pipeline futás - pusholás...
   - script: |
       git config --global --add url."git@github.com:".insteadOf "https://github.com/"
       git config --global user.email "adam.szanto1@gmail.com"
@@ -70,8 +71,7 @@ steps:
   
       git pull master
       git add --all
-#      Ha skip ci bennevan a commit messageben, akkor az nem triggereli a pipeline-t. Tehát nem lesz infinite loop pipeline futás - pusholás...
-      git commit -m"[skip ci]"
+      git commit -m "[skip ci]"
       git push origin HEAD:refs/heads/master
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     displayName: 'Push local changes'
