@@ -50,9 +50,28 @@ steps:
       docker tag issuetracker:latest adamsz1/issue-tracker:$tag
       docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
       docker push adamsz1/issue-tracker:$tag
+
     env:
         DOCKER_USERNAME: $(dockerhubUsername)
         DOCKER_PASSWORD: $(dockerhubPassword)
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 #    succeeded() helyett más condition értékek is lehetnek: always() , failure() stb...
     displayName: 'Push Docker Image'
+
+  - script: |
+      mvn release:update-versions -DautoVersionSubmodules=true
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    displayName: 'Update maven version'
+
+  - script: |
+      git config --global --add url."git@github.com:".insteadOf "https://github.com/"
+      git config --global user.email "adam.szanto1@gmail.com"
+      git config --global user.name "Adamsz1"
+  
+      git pull master
+      git add --all
+#      Ha skip ci bennevan a commit messageben, akkor az nem triggereli a pipeline-t. Tehát nem lesz infinite loop pipeline futás - pusholás...
+      git commit -m"[skip ci]"
+      git push origin HEAD:refs/heads/master
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    displayName: 'Push local changes'
