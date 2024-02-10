@@ -22,11 +22,11 @@ steps:
       dockerVersion: '20.10.21'
     displayName: 'Install Docker'
   - script: |
-      ./mvnw clean test
+      mvn clean test
     displayName: 'Compile & test'
 
   - script: |
-      ./mvnw package
+      mvn package
     displayName: 'Create JAR'
 
   - script: |
