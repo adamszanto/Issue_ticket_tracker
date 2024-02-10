@@ -1,8 +1,19 @@
+#pr:
+#  none
+
+trigger:
+  branches:
+    exclude:
+      - feature/*
+      - NOJIRA*
+      - nojira*
+
 pool:
   vmImage: 'ubuntu-latest'
 
 variables:
   - group: git-configurations
+  - group: docker-configurations
 
 steps:
   - task: JavaToolInstaller@0
@@ -33,3 +44,13 @@ steps:
       docker build --tag issuetracker:latest .
       docker images
     displayName: 'Create Docker Image'
+
+  - script: |
+      tag="$(git rev-parse --short HEAD)"
+      docker tag issuetracker:latest adamsz1/issue-tracker:$tag
+      docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+      docker push adamsz1/issue-tracker:$tag
+    env:
+        DOCKER_USERNAME: $(dockerhubUsername)
+        DOCKER_PASSWORD: $(dockerhubPassword)
+    displayName: 'Push Docker Image'
