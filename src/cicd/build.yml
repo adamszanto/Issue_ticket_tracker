@@ -59,7 +59,7 @@ steps:
     displayName: 'Push Docker Image'
 
   - script: |
-      mvn release:update-versions -DautoVersionSubmodules=true
+      mvn -B release:update-versions -DautoVersionSubmodules=true
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     displayName: 'Update maven version'
 
