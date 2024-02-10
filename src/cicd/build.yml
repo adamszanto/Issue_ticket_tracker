@@ -53,4 +53,6 @@ steps:
     env:
         DOCKER_USERNAME: $(dockerhubUsername)
         DOCKER_PASSWORD: $(dockerhubPassword)
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+#    succeeded() helyett más condition értékek is lehetnek: always() , failure() stb...
     displayName: 'Push Docker Image'
